@@ -1,0 +1,37 @@
+<div class="flex items-center justify-between px-4 py-2 bg-purple-700 text-white">
+    <!-- App Name -->
+    <div class="font-semibold text-lg">Fokys</div>
+
+    <!-- Icons (placeholders for now) -->
+    <div class="flex gap-4 items-center">
+        <!-- Light/Dark Toggle -->
+        <button (click)="toggleDarkMode()">
+            <lucide-angular [img]="isDark ? SunIcon : MoonIcon" class="w-5 h-5"></lucide-angular>
+        </button>
+    </div>
+</div>
+
+<div class="flex border-b text-sm font-medium">
+    <button class="px-4 py-2 uppercase font-semibold"
+        [ngClass]="{ 'border-b-2 text-purple-700 bg-purple-50 border-purple-700': activeTab === 'analytics', 'text-gray-400 hover:text-purple-600': activeTab !== 'analytics' }"
+        (click)="switchTab('analytics')">
+        Analytics
+    </button>
+
+    <button class="px-4 py-2 uppercase font-semibold"
+        [ngClass]="{ 'border-b-2 text-purple-700 bg-purple-50 border-purple-700': activeTab === 'fokys', 'text-gray-400 hover:text-purple-600': activeTab !== 'fokys' }"
+        (click)="switchTab('fokys')">
+        Fokys
+    </button>
+
+    <button class="px-4 py-2 uppercase font-semibold"
+        [ngClass]="{ 'border-b-2 text-purple-700 bg-purple-50 border-purple-700': activeTab === 'settings', 'text-gray-400 hover:text-purple-600': activeTab !== 'settings' }"
+        (click)="switchTab('settings')">
+        Settings
+    </button>
+</div>
+
+
+<app-analytics *ngIf="activeTab === 'analytics'"></app-analytics>
+<app-fokys *ngIf="activeTab === 'fokys'"></app-fokys>
+<app-settings *ngIf="activeTab === 'settings'"></app-settings>

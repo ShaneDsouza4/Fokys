@@ -1,0 +1,33 @@
+<div class="p-4 text-sm bg-white text-black dark:bg-gray-900 dark:text-white">
+    <h2 class="text-lg font-semibold mb-2">Today's Usage</h2>
+    <div *ngIf="data?.details?.length > 0; else noData">
+
+        <div>
+            <h3 class="font-medium">By Category</h3>
+            <ul class="ml-4 list-disc">
+                <li *ngFor="let cat of sortedUsageCategories">
+                    {{ cat.category }}: {{ formatTime(cat.time) }}
+                </li>
+            </ul>
+        </div>
+
+        <div class="mt-4">
+            <h3 class="font-medium">Top Domains</h3>
+            <ul *ngIf="topDomains.length > 0">
+                <li *ngFor="let domain of topDomains">
+                    {{ domain.domain }} — {{ formatTime(domain.time) }}
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <ng-template #noData>
+        <p class="ml-4 text-gray-500 italic">No usage data for today</p>
+    </ng-template>
+
+    <a class="mt-4 block text-blue-600 hover:underline" href="#" (click)="openDashboard()">
+        View Full Dashboard →
+    </a>
+</div>

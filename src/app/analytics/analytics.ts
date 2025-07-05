@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, NgZone, OnInit } from '@angular/core';
 
 interface UsageEntry {
@@ -8,7 +9,7 @@ interface UsageEntry {
 
 @Component({
   selector: 'app-analytics',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './analytics.html',
   styleUrl: './analytics.css'
 })
@@ -74,6 +75,19 @@ export class Analytics implements OnInit {
   openDashboard() {
     console.log("Open")
     //chrome.tabs.create({ url: 'dashboard.html' }); // Or your defined route
+  }
+
+  getCategoryBadgeClass(category: string): string {
+    switch (category.toLowerCase()) {
+      case 'work':
+        return 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-200';
+      case 'entertainment':
+        return 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-200';
+      case 'other':
+        return 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-200';
+      default:
+        return 'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-100';
+    }
   }
 
 }

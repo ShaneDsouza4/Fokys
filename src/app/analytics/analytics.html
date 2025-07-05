@@ -1,33 +1,40 @@
 <div class="p-4 text-sm bg-white text-black dark:bg-gray-900 dark:text-white">
-    <h2 class="text-lg font-semibold mb-2">Today's Usage</h2>
+    <h2 class="text-lg font-semibold mb-4">Today's Usage</h2>
+
     <div *ngIf="data?.details?.length > 0; else noData">
+        <!-- By Category -->
+        <div class="mb-6">
+            <h3 class="text-sm font-medium text-gray-600 dark:text-gray-300 mb-2">By Category</h3>
+            <div class="flex flex-wrap gap-2">
+                <span *ngFor="let cat of sortedUsageCategories" [ngClass]="getCategoryBadgeClass(cat.category)"
+                    class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold">
+                    {{ cat.category }}:
+                    <span class="ml-1 font-normal">{{ formatTime(cat.time) }}</span>
+                </span>
+            </div>
+        </div>
 
+        <!-- Top Domains -->
         <div>
-            <h3 class="font-medium">By Category</h3>
-            <ul class="ml-4 list-disc">
-                <li *ngFor="let cat of sortedUsageCategories">
-                    {{ cat.category }}: {{ formatTime(cat.time) }}
+            <h3 class="text-sm font-medium text-gray-600 dark:text-gray-300 mb-2">Top Domains</h3>
+            <ul class="space-y-1">
+                <li *ngFor="let domain of topDomains"
+                    class="flex justify-between items-center border-b border-gray-100 dark:border-gray-700 py-1">
+                    <span class="truncate text-gray-700 dark:text-gray-100">{{ domain.domain }}</span>
+                    <span
+                        class="text-xs bg-gray-200 dark:bg-gray-700 dark:text-white text-gray-800 rounded-full px-2 py-0.5 ml-2">
+                        {{ formatTime(domain.time) }}
+                    </span>
                 </li>
             </ul>
         </div>
-
-        <div class="mt-4">
-            <h3 class="font-medium">Top Domains</h3>
-            <ul *ngIf="topDomains.length > 0">
-                <li *ngFor="let domain of topDomains">
-                    {{ domain.domain }} — {{ formatTime(domain.time) }}
-                </li>
-            </ul>
-
-        </div>
-
     </div>
 
     <ng-template #noData>
-        <p class="ml-4 text-gray-500 italic">No usage data for today</p>
+        <p class="text-gray-500 italic mt-4">No usage data for today</p>
     </ng-template>
 
-    <a class="mt-4 block text-blue-600 hover:underline" href="#" (click)="openDashboard()">
+    <a class="mt-6 block text-blue-600 hover:underline text-sm font-medium" href="#" (click)="openDashboard()">
         View Full Dashboard →
     </a>
 </div>

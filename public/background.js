@@ -196,3 +196,22 @@ chrome.runtime.onStartup.addListener(() => {
     periodInMinutes: 1440
   });
 });
+
+chrome.webNavigation.onBeforeNavigate.addListener((details) => {
+
+  const url = new URL(details.url);
+  if (url.protocol === 'chrome-extension:' || url.protocol === 'chrome:') return;
+
+  chrome.storage.local.get('blockedDomains', (result) => {
+    const blocked = result.blockedDomains || [];
+    const url = new URL(details.url);
+    const hostname = url.hostname;
+    console.log("Hostname", hostname)
+
+    if (blocked.includes(hostname)) {
+      chrome.tabs.update(details.tabId, {
+        url: chrome.runtime.getURL("blocked.html")
+      });
+    }
+  });
+}, { url: [{ schemes: ['https', 'http'] }] });

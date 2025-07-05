@@ -3,7 +3,7 @@
   "name": "Fokys",
   "version": "1.0.0",
   "description": "Track your browser time and stay focused.",
-  "permissions": ["tabs", "storage", "idle", "alarms", "notifications"],
+  "permissions": ["tabs", "storage", "idle", "alarms", "notifications", "webNavigation", "scripting"],
   "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "background.js"
@@ -20,5 +20,11 @@
     "16": "assets/icon16.png",
     "48": "assets/icon48.png",
     "128": "assets/icon128.png"
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["blocked.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }

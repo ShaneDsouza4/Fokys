@@ -24,6 +24,11 @@
                 "glob": "**/*",
                 "input": "public",
                 "output": "."
+              },
+              {
+                "glob": "blocked.html",
+                "input": "src",
+                "output": "."
               }
             ],
             "styles": [

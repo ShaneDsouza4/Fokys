@@ -1,1 +1,26 @@
-<p>fokys works!</p>
+<div class="p-4 space-y-4 bg-white text-black dark:bg-gray-900 dark:text-white">
+    <h2 class="text-lg font-semibold">Fokys Mode Blocklist</h2>
+
+    <div class="flex gap-2">
+        <input [(ngModel)]="domainToBlock" placeholder="Enter domain e.g. youtube.com"
+            class="border p-2 rounded w-full" />
+        <button (click)="blockDomain()" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
+            Block
+        </button>
+    </div>
+
+    <div *ngIf="blockedDomains.length > 0" class="mt-4">
+        <h3 class="font-medium">Blocked Domains:</h3>
+        <ul class="space-y-2 mt-2">
+            <li *ngFor="let domain of blockedDomains"
+                class="flex justify-between items-center bg-gray-100 dark:bg-gray-800 p-2 rounded">
+                <span>{{ domain }}</span>
+                <button (click)="unblockDomain(domain)" class="text-red-600 hover:underline text-sm">Unblock</button>
+            </li>
+        </ul>
+    </div>
+
+    <p *ngIf="blockedDomains.length === 0" class="text-gray-500 italic">
+        No domains are blocked yet.
+    </p>
+</div>
